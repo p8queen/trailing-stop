@@ -20,7 +20,7 @@ bool res;
 int OnInit()
   {
 //--- create timer
-   //EventSetTimer(1);
+   EventSetTimer(1);
    Comment("Point: ",Point,", trailingStop: ", trailinStop); 
 //---
    return(INIT_SUCCEEDED);
@@ -41,13 +41,24 @@ void OnTick()
   {
 //---
    //check profit TotalOrders
+   
+   
+  }
+//+------------------------------------------------------------------+
+//| Timer function                                                   |
+//+------------------------------------------------------------------+
+void OnTimer()
+  {
+//---
    orders = OrdersTotal()-1;
    for(a=orders;a>=0;a--){
+      Sleep(2000);
       if(OrderSelect(a,SELECT_BY_POS)){
          orProfit = OrderProfit()+OrderSwap()+OrderCommission();
          Comment("Check orderProfit >= profitMinimo ",orProfit," >= ", profitMinimo, 
                "\n Point: ",Point,", trailingStop: ", trailinStop, ", OrderProfit: ",OrderProfit(),
-               ", OrderTicket: ",OrderTicket());
+               ", OrderTicket: ",OrderTicket(), 
+               "\n OrdersTotal: ", OrdersTotal(), ", pos a: ", a);
          if(orProfit >= profitMinimo){
             
             if(OrderType()==OP_BUY)
@@ -66,14 +77,5 @@ void OnTick()
    
    
       }
-   
-  }
-//+------------------------------------------------------------------+
-//| Timer function                                                   |
-//+------------------------------------------------------------------+
-void OnTimer()
-  {
-//---
-   
   }
 //+------------------------------------------------------------------+
