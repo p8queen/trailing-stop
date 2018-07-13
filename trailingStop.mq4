@@ -60,7 +60,7 @@ void OnTimer()
                ", OrderTicket: ",OrderTicket(), 
                "\n OrdersTotal: ", OrdersTotal(), ", pos a: ", a);
          if(orProfit >= profitMinimo){
-            
+            Comment("orProfit >= profitMinimo");
             if(OrderType()==OP_BUY)
                newStopLoss = Bid-trailinStop;
               else
